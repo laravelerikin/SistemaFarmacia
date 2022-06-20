@@ -39,4 +39,27 @@ class SaleController extends Controller
 
         return response()->json($dataResponse);
     }
+
+    public function list()
+    {
+        try {
+            //lista todas las ventas
+            $sales = Sale::all();
+
+            //listar solo las ventas activos con estado 1
+            $sales = Sale::where('state', 1)->get();
+
+            $dataResponse = [
+                'status' => 'success',            
+                'data' => $sales
+            ];
+        } catch (\Exception $e) {
+            $dataResponse = [
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ];
+        }
+
+        return response()->json($dataResponse);
+    }
 }
