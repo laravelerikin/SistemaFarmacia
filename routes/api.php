@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -26,3 +27,6 @@ Route::get('products/list', [ProductController::class, 'list']);
 Route::get('products/show/{product}', [ProductController::class, 'show']);
 
 Route::delete('products/{product}', [ProductController::class, 'delete']);
+
+
+Route::post('sales/create', [SaleController::class, 'create']);
