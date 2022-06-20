@@ -32,3 +32,5 @@ Route::delete('products/{product}', [ProductController::class, 'delete']);
 Route::post('sales/create', [SaleController::class, 'create']);
 
 Route::get('sales/list', [SaleController::class, 'list']);
+
+Route::get('sales/show/{sale}', [SaleController::class, 'show']);

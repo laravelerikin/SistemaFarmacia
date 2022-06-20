@@ -62,4 +62,22 @@ class SaleController extends Controller
 
         return response()->json($dataResponse);
     }
+
+    public function show($sale)
+    {
+        $dataSale = Sale::find($sale);        
+        
+        $dataResponse = [
+            'status' => 'success',
+            'data' => [         
+                'client' => $dataSale->client,
+                'nit' => $dataSale->nit,
+                'total' => $dataSale->total,
+                'decimal' => $dataSale->decimal,
+                'cambio' => $dataSale->cambio                
+                ]
+            ];
+
+        return response()->json($dataResponse);
+    }
 }
