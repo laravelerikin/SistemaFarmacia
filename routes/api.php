@@ -21,16 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('products/create', [ProductController::class, 'create']);
-
 Route::get('products/list', [ProductController::class, 'list']);
-
 Route::get('products/show/{product}', [ProductController::class, 'show']);
-
 Route::delete('products/{product}', [ProductController::class, 'delete']);
-
+Route::put("products/{product}", [ProductController::class, 'update']);
 
 Route::post('sales/create', [SaleController::class, 'create']);
-
 Route::get('sales/list', [SaleController::class, 'list']);
-
 Route::get('sales/show/{sale}', [SaleController::class, 'show']);

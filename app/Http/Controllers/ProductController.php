@@ -88,8 +88,52 @@ class ProductController extends Controller
         return response()->json($dataResponse);
     }
 
-    public function delete($product)
+    public function delete(Product $product)
     {
-        echo "Eliminado".$product;
+        try {
+            $product->state = 0;
+            $product->save();
+
+            $dataResponse = [
+                'status' => 'success',
+                'message' => 'Producto eliminado correctamente',
+            ];
+            return response()->json($dataResponse);
+        } catch (Exception $e) {
+            $dataResponse = [
+                'status' => 'error',
+                'message' => 'Error al eliminar el producto',
+            ];
+            return response()->json($dataResponse);
+        }
+
+        // $dataProduct = Product::find($product);
+        // dd($product);
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        try {
+            $name = $request->input("name");
+            $price = $request->input("price");
+            $detail = $request->input("detail");
+
+            $product->name = $name;
+            $product->price = $price;
+            $product->detail = $detail;
+
+            $product->save();
+            $dataResponse = [
+                'status' => 'success',
+                'message' => 'Producto actualizado correctamente',
+            ];
+            return response()->json($dataResponse);
+        } catch (Exception $e) {
+            $dataResponse = [
+                'status' => 'error',
+                'message' => 'Error al actualizar el producto',
+            ];
+            return response()->json($dataResponse);
+        }
     }
 }
