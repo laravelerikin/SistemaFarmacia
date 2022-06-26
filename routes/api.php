@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BuyProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +21,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('products/create', [ProductController::class, 'create']);
-Route::get('products/list', [ProductController::class, 'list']);
-Route::get('products/show/{product}', [ProductController::class, 'show']);
-Route::delete('products/{product}', [ProductController::class, 'delete']);
-Route::put("products/{product}", [ProductController::class, 'update']);
+Route::group(['prefix' => 'products', 'middleware' => 'auth:api'], function () {
+    Route::post('create', [ProductController::class, 'create']);
+    Route::get('list', [ProductController::class, 'list']);
+    Route::get('show/{product}', [ProductController::class, 'show']);
+    Route::delete('{product}', [ProductController::class, 'delete']);
+    Route::put("{product}", [ProductController::class, 'update']);
+});
+
+Route::prefix('buys')->group(function(){
+    Route::apiResource("products", BuyProductController::class);
+});
+
 
 Route::post('sales/create', [SaleController::class, 'create']);
 Route::get('sales/list', [SaleController::class, 'list']);

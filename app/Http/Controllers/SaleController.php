@@ -103,14 +103,7 @@ class SaleController extends Controller
 
     public function update(Request $request, Sale $sale)
     {
-        try {
-            // $name = $request->input("name");
-            // $price = $request->input("price");
-            // $detail = $request->input("detail");
-
-            // $product->name = $name;
-            // $product->price = $price;
-            // $product->detail = $detail;
+        try {            
 
             $name = $request->input('name');
             $nit = $request->input('nit');
