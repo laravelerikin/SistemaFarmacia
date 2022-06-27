@@ -15,11 +15,26 @@ class SaleDetail extends Model
 
     public function sale()
     {
-        return $this->hasMany(SaleDetail::class, 'id_sale', 'id_sale');
+        return $this->belongsTo(Sale::class, 'id_sale', 'id_sale');
     }
 
-    public function saleDetails()
+    public function product()
     {
-        return $this->hasMany(SaleDetail::class, 'id_product', 'id_product');
+        return $this->belongsTo(Product::class, 'id_product', 'id_product');
+    }
+
+    public static function storeSaleDetail($id_sale, $id_product, $price, $subtotal)
+    {
+        $saleDetail = new SaleDetail();
+
+        $saleDetail->id_sale = $id_sale;
+        $saleDetail->id_product = $id_product;
+        $saleDetail->price = $price;
+        $saleDetail->subtotal = $subtotal;
+        $saleDetail->state = 1;
+
+        $saleDetail->save();
+
+        return $saleDetail;
     }
 }

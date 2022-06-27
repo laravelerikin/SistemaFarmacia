@@ -15,7 +15,7 @@ class Sale extends Model
 
     public function saleDetails()
     {
-        return $this->hasMany(SaleDetail::class, 'id_product', 'id_product');
+        return $this->hasMany(SaleDetail::class, 'id_sale', 'id_sale');
     }
 
     public static function storeSale(Request $request)
